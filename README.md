@@ -1,56 +1,78 @@
 # Event and Ticket Booking System
-### BCSE302L – Database Systems Project
+### BCSE302L – Database Systems Course Project (Reviews I, II & III)
 
 **Authors:**
-- **Kevin T John** (`24BYB0163`)
-- **Govind B Nair** (`24BYB0101`)
-- **Shaarav S** (`24BYB0118`)
+- **Kevin T John** (`24BYB0163`) — Core Architecture, Venues, Users & Events
+- **Govind B Nair** (`24BYB0101`) — Seating Categories, Ticket Inventory & Bookings
+- **Shaarav S** (`24BYB0118`) — Payments, Cancellations & Advanced Analytics
+
+**Faculty:** Ramkumar T | **Slot:** GT+TG1 | **Database:** PostgreSQL 16 (PL/pgSQL)
 
 ---
 
-## 📁 Project Structure
+## 📁 Complete Project Structure
 
 ```
-dbpro/
-├── docker-compose.yml              # PostgreSQL 16 container service configuration
-├── run_db.sh                       # Automation script for start/stop/init/queries/psql
-├── README.md                       # Master project overview & instructions
+db project/
+├── app/
+│   ├── db.py                       # PostgreSQL 16 driver wrapper (psycopg2)
+│   ├── server.py                   # Flask Web Server & REST API
+│   ├── static/
+│   │   ├── app.js                  # Client application logic & transaction inspector
+│   │   └── style.css               # Modern dark-mode cyber design system
+│   └── templates/
+│       └── index.html              # Interactive Review III Web Dashboard
+├── cli_app.py                      # Interactive Terminal CLI for live viva demonstrations
 ├── database/
 │   ├── 01_schema.sql               # DDL: 8 Tables, Primary Keys, Foreign Keys, CHECK constraints
-│   ├── 02_seed_data.sql            # DML: Realistic dataset for all entities
-│   └── 03_review2_queries.sql      # Review II SQL Queries (Joins, Aggregations, Subqueries, Views)
-└── docs/
-    ├── BCSE302L_Review_I_Report.md  # Complete Review I Documentation (ER diagram, Normalization, Schema)
-    └── BCSE302L_Review_II_Report.md # Complete Review II Documentation (DDL, DML, Query outputs)
+│   ├── 02_seed_data.sql            # DML: Comprehensive dataset (10+ records across all tables)
+│   ├── 03_review2_queries.sql      # Review II SQL Queries (Joins, Aggregations, Subqueries, Views)
+│   ├── 04_plsql.sql                # Review II & III: Procedures, Functions, Cursors, and Triggers
+│   └── demos/
+│       ├── 06_dml_demo.sql         # Section 6.4 DML operations & constraint verification
+│       └── 07_transactions_demo.sql # Section 9: 7 Real-World Transaction workflows
+├── docs/
+│   ├── BCSE302L_Review_I_Report.md  # Complete Review I Documentation
+│   ├── BCSE302L_Review_II_Report.md # Complete Review II Documentation
+│   ├── BCSE302L_Review_III_Report.md# Review III Integrated System & Viva Guide
+│   └── Team_Presentation_Guide.md  # Speaking script & table allocations
+├── docker-compose.yml              # PostgreSQL 16 container service configuration
+├── run_db.sh                       # Automation script for start/stop/init/queries/demo/psql
+└── venv/                           # Python virtual environment (psycopg2-binary, flask)
 ```
 
 ---
 
 ## 🚀 Quick Start Guide
 
-### 1. Start the PostgreSQL Database
+### 1. Database Setup
 ```bash
+# Start PostgreSQL container
 ./run_db.sh start
-```
 
-### 2. Initialize Schema & Seed Data
-```bash
+# Apply schema (01), seed data (02), and PL/pgSQL routines (04)
 ./run_db.sh init
-```
 
-### 3. Run Review II Queries
-```bash
+# Run Review II queries suite
 ./run_db.sh queries
+
+# Run DML & Real-World Transaction demo scripts
+./run_db.sh demo
 ```
 
-### 4. Open Interactive PostgreSQL CLI
-```bash
-./run_db.sh psql
-```
+### 2. Launch Interactive Application (Review III)
 
-### 5. Reset / Re-seed Anytime
+#### Option A: Modern Web Dashboard
 ```bash
-./run_db.sh reset
+source venv/bin/activate
+python3 app/server.py
+```
+*Open [http://localhost:5050](http://localhost:5050) in your browser.*
+
+#### Option B: Terminal Interactive CLI
+```bash
+source venv/bin/activate
+python3 cli_app.py
 ```
 
 ---
@@ -64,24 +86,7 @@ dbpro/
 
 ---
 
-## 📑 Academic Review Reports & Guides
-- **Team Presentation & Demo Guide**: [docs/Team_Presentation_Guide.md](docs/Team_Presentation_Guide.md)
-  - 3-Member speaking script & role assignments (**Kevin**, **Govind**, **Shaarav**)
-  - Comprehensive Table Outlines & exact `CREATE TABLE` DDL blocks
-  - Assigned queries, terminal walkthrough, and expected viva Q&A
-- **Review I Report**: [docs/BCSE302L_Review_I_Report.md](docs/BCSE302L_Review_I_Report.md)
-  - Problem Statement, Objectives, User Roles
-  - ER Model (Mermaid Diagram & Cardinalities)
-  - Relational Schema & Constraints
-  - 1NF, 2NF, 3NF, BCNF Normalization proofs
-- **Review II Report**: [docs/BCSE302L_Review_II_Report.md](docs/BCSE302L_Review_II_Report.md)
-  - DDL Execution Summary & Table Outlines
-  - Seed Dataset Analysis
-  - Query outputs: Multi-Table Joins, Subqueries, Window Functions, and Views
-
----
-
-## 🏛️ Database Tables & Outline Overview
+## 🏛️ Database Tables & Member Allocation
 
 | # | Table | Primary Key | Foreign Key References | Key Constraints & Business Rules | Lead Member |
 | :-: | :--- | :--- | :--- | :--- | :--- |
@@ -93,4 +98,3 @@ dbpro/
 | 6 | `TICKET` | `ticket_id` | `booking_id → BOOKING`<br>`category_id → SEAT_CATEGORY` | `UNIQUE(category_id, seat_number)` strictly prevents double-booking | Govind |
 | 7 | `PAYMENT` | `payment_id` | `booking_id → BOOKING` | `amount_paid >= 0`, supports $1:N$ failed/retry payment attempts | Shaarav |
 | 8 | `CANCELLATION` | `cancel_id` | `booking_id → BOOKING` | `booking_id UNIQUE` enforces $1:0..1$ (prevents duplicate cancellations) | Shaarav |
-
