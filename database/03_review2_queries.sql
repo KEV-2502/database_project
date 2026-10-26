@@ -15,10 +15,10 @@ FROM EVENT
 WHERE event_date BETWEEN '2026-11-01' AND '2026-12-31'
 ORDER BY event_date ASC, event_time ASC;
 
--- Query 1.2: Search for users registered with institutional academic emails (@vitstudent.ac.in)
+-- Query 1.2: Search for users registered with standard email accounts (@gmail.com)
 SELECT user_id, name, email, phone, role
 FROM USERS
-WHERE email LIKE '%@vitstudent.ac.in'
+WHERE email LIKE '%@gmail.com'
 ORDER BY name ASC;
 
 -- Query 1.3: Retrieve high-capacity venues (capacity >= 2000) situated in metropolitan areas

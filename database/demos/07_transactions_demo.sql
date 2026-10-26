@@ -7,7 +7,7 @@
 
 \echo '========================================================================'
 \echo 'TRANSACTION 1: Customer books tickets atomically'
-\echo 'Operation: Arjun Reddy (user 10) books GC-201 and GC-202 for ElectroBeat'
+\echo 'Operation: Arjun Reddy (user 10) books GC-201 and GC-202 for Music Festival 2026'
 \echo 'Procedures/Triggers: sp_book_tickets, trg_ticket_validate, trg_ticket_inventory'
 \echo '========================================================================'
 CALL sp_book_tickets(10, 2, ARRAY['GC-201', 'GC-202'], NULL);
@@ -65,7 +65,7 @@ END $$;
 \echo 'Operation: Arjun cancels Hackathon passes (booking 15) 11 days before event'
 \echo 'Procedures/Functions: sp_cancel_booking, fn_calculate_refund (75% tier)'
 \echo '========================================================================'
-CALL sp_cancel_booking(15, 'Hackathon team could not travel to Bangalore');
+CALL sp_cancel_booking(15, 'Could not attend Bangalore Hackathon');
 
 SELECT b.booking_id, b.status AS booking_status, c.refund_amount, c.status AS cancel_status,
        (SELECT string_agg(seat_number || '=' || status, ', ') FROM TICKET WHERE booking_id = 15) AS ticket_states,

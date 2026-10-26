@@ -23,7 +23,7 @@ def banner():
     print("=" * 75)
     print("  🎟️  EVENT AND TICKET BOOKING SYSTEM - INTERACTIVE CLI DEMO")
     print("  BCSE302L - Database Systems | Review III Final Evaluation")
-    print("  Team: Kevin T John (24BYB0163), Govind B Nair (24BYB0101), Shaarav S (24BYB0118)")
+    print("  Team: Kevin T John, Govind B Nair, Shaarav S")
     print("=" * 75)
 
 def check_db():

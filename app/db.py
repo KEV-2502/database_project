@@ -298,10 +298,10 @@ def run_query(query_num):
             WHERE event_date BETWEEN '2026-11-01' AND '2026-12-31'
             ORDER BY event_date ASC, event_time ASC;
         """),
-        "1.2": ("VIT Student Academic Accounts", """
+        "1.2": ("Standard Email Accounts (@gmail.com)", """
             SELECT user_id, name, email, phone, role
             FROM USERS
-            WHERE email LIKE '%@vitstudent.ac.in'
+            WHERE email LIKE '%@gmail.com'
             ORDER BY name ASC;
         """),
         "1.3": ("High-Capacity Venues (>= 2000)", """

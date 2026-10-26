@@ -34,9 +34,9 @@
         <div class="role-selector">
           <label for="activeUserSelect" style="font-size: 0.8rem; color: var(--text-muted);">Active User:</label>
           <select id="activeUserSelect" onchange="onUserChanged()">
-            <option value="4" data-role="CUSTOMER">Kevin T John (Customer - 24BYB0163)</option>
-            <option value="5" data-role="CUSTOMER">Govind B Nair (Customer - 24BYB0101)</option>
-            <option value="6" data-role="CUSTOMER">Shaarav S (Customer - 24BYB0118)</option>
+            <option value="4" data-role="CUSTOMER">Kevin T John (Customer)</option>
+            <option value="5" data-role="CUSTOMER">Govind B Nair (Customer)</option>
+            <option value="6" data-role="CUSTOMER">Shaarav S (Customer)</option>
             <option value="10" data-role="CUSTOMER">Arjun Reddy (Customer)</option>
             <option value="11" data-role="CUSTOMER">Sneha Kulkarni (Customer)</option>
             <option value="2" data-role="ORGANIZER">Priya Nair (Organizer)</option>
@@ -241,7 +241,7 @@
       <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap;">
         <select id="querySelect" class="form-control" style="max-width: 450px;" onchange="onQuerySelected()">
           <option value="1.1">Query 1.1: Upcoming Events in Nov-Dec 2026 (BETWEEN)</option>
-          <option value="1.2">Query 1.2: VIT Academic Student Accounts (LIKE '%@vitstudent.ac.in')</option>
+          <option value="1.2">Query 1.2: Standard Email Accounts (LIKE '%@gmail.com')</option>
           <option value="1.3">Query 1.3: High-Capacity Venues (capacity >= 2000)</option>
           <option value="2.1">Query 2.1: Detailed Booking Receipts (4-Table INNER JOIN)</option>
           <option value="2.2">Query 2.2: Venues & Scheduled Events (LEFT OUTER JOIN, COALESCE)</option>
