@@ -21,7 +21,7 @@ from db import (
 
 def banner():
     print("=" * 75)
-    print("  🎟️  EVENT AND TICKET BOOKING SYSTEM - INTERACTIVE CLI DEMO")
+    print("  EVENT AND TICKET BOOKING SYSTEM - INTERACTIVE CLI DEMO")
     print("  BCSE302L - Database Systems | Review III Final Evaluation")
     print("  Team: Kevin T John, Govind B Nair, Shaarav S")
     print("=" * 75)
@@ -29,11 +29,11 @@ def banner():
 def check_db():
     ok, info = test_connection()
     if not ok:
-        print(f"\n❌ [ERROR] Could not connect to PostgreSQL 16 on localhost:5432.")
+        print(f"\n[ERROR] [ERROR] Could not connect to PostgreSQL 16 on localhost:5432.")
         print(f"Details: {info}")
         print("\nPlease ensure PostgreSQL is running (e.g. ./run_db.sh start)")
         return False
-    print(f"\n✅ [CONNECTED] PostgreSQL 16 Database Engine Online!")
+    print(f"\n[SUCCESS] [CONNECTED] PostgreSQL 16 Database Engine Online!")
     return True
 
 def show_menu():
@@ -73,13 +73,13 @@ def op_book_tickets():
     print(f"\n[EXECUTING] CALL sp_book_tickets({user_id}, {cat_id}, ARRAY{seats}, NULL)...")
     try:
         booking_id, notices = book_tickets(int(user_id), int(cat_id), seats)
-        print(f"\n✅ SUCCESS! Booking #{booking_id} created in PENDING status.")
+        print(f"\n[SUCCESS] SUCCESS! Booking #{booking_id} created in PENDING status.")
         for n in notices:
             print(f"   NOTICE: {n}")
         print("\nFlow Verified: User Op -> sp_book_tickets -> trg_ticket_validate -> trg_ticket_inventory")
         return booking_id
     except Exception as e:
-        print(f"\n❌ [POSTGRESQL REJECTION]: {e}")
+        print(f"\n[ERROR] [POSTGRESQL REJECTION]: {e}")
         return None
 
 def op_make_payment(booking_id=None):
@@ -100,11 +100,11 @@ def op_make_payment(booking_id=None):
     try:
         ok, notices = make_payment(int(booking_id), method, sim)
         status_str = "SUCCESS (Booking CONFIRMED)" if sim else "FAILED (Stored for Retry)"
-        print(f"\n✅ Payment processed: {status_str}")
+        print(f"\n[SUCCESS] Payment processed: {status_str}")
         for n in notices:
             print(f"   NOTICE: {n}")
     except Exception as e:
-        print(f"\n❌ [ERROR]: {e}")
+        print(f"\n[ERROR] [ERROR]: {e}")
 
 def op_cancel_booking():
     print("\n--- POLICY-BASED CANCELLATION (sp_cancel_booking & fn_calculate_refund) ---")
@@ -125,12 +125,12 @@ def op_cancel_booking():
     print(f"\n[EXECUTING] CALL sp_cancel_booking({booking_id}, '{reason}')...")
     try:
         ok, notices = cancel_booking(int(booking_id), reason)
-        print(f"\n✅ SUCCESS! Booking #{booking_id} cancelled. Refund of ₹{quote:.2f} issued.")
+        print(f"\n[SUCCESS] SUCCESS! Booking #{booking_id} cancelled. Refund of ₹{quote:.2f} issued.")
         for n in notices:
             print(f"   NOTICE: {n}")
         print("Flow Verified: sp_cancel_booking -> fn_calculate_refund -> trg_ticket_inventory (restored seats)")
     except Exception as e:
-        print(f"\n❌ [ERROR]: {e}")
+        print(f"\n[ERROR] [ERROR]: {e}")
 
 def op_test_double_booking():
     print("\n--- TEST: DOUBLE-BOOKING ATTEMPT (Integrity Constraint Validation) ---")
@@ -138,7 +138,7 @@ def op_test_double_booking():
     try:
         book_tickets(11, 2, ["GC-101"])
     except Exception as e:
-        print(f"\n🛡️ [DATABASE INTEGRITY DEMONSTRATION]:")
+        print(f"\n[SECURITY] [DATABASE INTEGRITY DEMONSTRATION]:")
         print(f"Expected Error Caught: {e}")
         print("Integrity Verified: UNIQUE(category_id, seat_number) prevents duplicate seat issuance.")
 
@@ -157,7 +157,7 @@ def op_test_oversell():
     try:
         add_seat_category(3, "Standing Promenade", 500.00, 2000)
     except Exception as e:
-        print(f"\n🛡️ [TRIGGER ENFORCEMENT DEMONSTRATION]:")
+        print(f"\n[SECURITY] [TRIGGER ENFORCEMENT DEMONSTRATION]:")
         print(f"Trigger trg_category_capacity blocked insert:\n{e}")
 
 def op_admin_settle():
@@ -165,12 +165,12 @@ def op_admin_settle():
     print("[EXECUTING] CALL sp_settle_approved_cancellations()...")
     try:
         notices = run_settle_cancellations()
-        print("\n✅ Cursor Batch Job Completed:")
+        print("\n[SUCCESS] Cursor Batch Job Completed:")
         for n in notices:
             print(f"   {n}")
         print("Cursor Verified: Explicit cursor loop with FOR UPDATE OF c and WHERE CURRENT OF")
     except Exception as e:
-        print(f"\n❌ [ERROR]: {e}")
+        print(f"\n[ERROR] [ERROR]: {e}")
 
 def op_admin_expire():
     print("\n--- ADMIN: EXPIRE STALE CHECKOUTS CURSOR (sp_expire_stale_bookings) ---")
@@ -178,11 +178,11 @@ def op_admin_expire():
     print(f"\n[EXECUTING] CALL sp_expire_stale_bookings(INTERVAL '{hours} hours')...")
     try:
         notices = run_expire_stale_bookings(int(hours))
-        print("\n✅ Parameterized Cursor Finished:")
+        print("\n[SUCCESS] Parameterized Cursor Finished:")
         for n in notices:
             print(f"   {n}")
     except Exception as e:
-        print(f"\n❌ [ERROR]: {e}")
+        print(f"\n[ERROR] [ERROR]: {e}")
 
 def op_admin_spend():
     print("\n--- CUSTOMER LIFETIME SPEND ANALYTICS (fn_customer_lifetime_spend) ---")
@@ -201,7 +201,7 @@ def op_run_queries():
         if not title:
             print("Invalid query number.")
             return
-        print(f"\n📊 {title}")
+        print(f"\n{title}")
         print("-" * 75)
         print(sql)
         print("-" * 75)

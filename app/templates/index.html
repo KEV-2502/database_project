@@ -18,10 +18,10 @@
   <header>
     <div class="nav-container">
       <div class="logo-badge">
-        <div class="logo-icon">🎟️</div>
+        <div class="logo-icon">T</div>
         <div class="logo-text">
           <h1>Event & Ticket Booking System</h1>
-          <p>BCSE302L Course Project · Review III Final Interactive Demo</p>
+          
         </div>
       </div>
 
@@ -50,12 +50,11 @@
     <!-- Navigation Tabs -->
     <div class="nav-container" style="padding-top: 0; padding-bottom: 0.5rem;">
       <div class="tabs-bar">
-        <button class="tab-btn active" onclick="switchTab('catalogPane')">🎪 Browse Events</button>
-        <button class="tab-btn" onclick="switchTab('walletPane')">🎫 My Wallet & Bookings</button>
-        <button class="tab-btn" id="organizerTabBtn" onclick="switchTab('organizerPane')">🏢 Organizer Hub</button>
-        <button class="tab-btn" id="adminTabBtn" onclick="switchTab('adminPane')">⚡ Admin & Batch Cursors</button>
-        <button class="tab-btn" onclick="switchTab('queriesPane')">📊 Academic Query Suite</button>
-      </div>
+        <button class="tab-btn active" onclick="switchTab('catalogPane')">Browse Events</button>
+        <button class="tab-btn" onclick="switchTab('walletPane')">My Wallet & Bookings</button>
+        <button class="tab-btn" id="organizerTabBtn" onclick="switchTab('organizerPane')">Organizer Hub</button>
+        <button class="tab-btn" id="adminTabBtn" onclick="switchTab('adminPane')">Admin & Batch Cursors</button>
+        </div>
     </div>
   </header>
 
@@ -91,7 +90,7 @@
           <h2 style="font-size: 1.5rem;">Upcoming Events Catalog</h2>
           <p style="color: var(--text-muted); font-size: 0.85rem;">Sourced in real-time from View: <code>v_public_event_catalog</code></p>
         </div>
-        <button class="btn btn-secondary btn-sm" onclick="loadCatalog()">🔄 Refresh Catalog</button>
+        <button class="btn btn-secondary btn-sm" onclick="loadCatalog()">Refresh Catalog</button>
       </div>
       <div class="cards-grid" id="eventsGrid">
         <div style="color: var(--text-muted);">Loading events from database...</div>
@@ -105,7 +104,7 @@
           <h2 style="font-size: 1.5rem;">My Bookings & Digital Ticket Wallet</h2>
           <p style="color: var(--text-muted); font-size: 0.85rem;">Sourced from <code>BOOKING</code>, <code>TICKET</code>, and View <code>v_customer_ticket_wallet</code></p>
         </div>
-        <button class="btn btn-secondary btn-sm" onclick="loadUserWallet()">🔄 Refresh Wallet</button>
+        <button class="btn btn-secondary btn-sm" onclick="loadUserWallet()">Refresh Wallet</button>
       </div>
 
       <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--accent-cyan);">Recent Bookings</h3>
@@ -157,7 +156,7 @@
           <h2 style="font-size: 1.5rem;">Organizer Event Management</h2>
           <p style="color: var(--text-muted); font-size: 0.85rem;">Tracks venue allocations and live event occupancy computed by <code>fn_event_occupancy()</code></p>
         </div>
-        <button class="btn btn-primary" onclick="openAddCategoryModal()">➕ Add Seat Category (Test Capacity Trigger)</button>
+        <button class="btn btn-primary" onclick="openAddCategoryModal()">Add Seat Category (Test Capacity Trigger)</button>
       </div>
 
       <div class="table-wrapper">
@@ -196,7 +195,7 @@
               Executes <code>sp_settle_approved_cancellations()</code>. Opens explicit cursor over APPROVED requests, locks rows with <code>FOR UPDATE OF c</code>, invokes <code>fn_calculate_refund</code>, restores seat inventory, and marks cancellation PROCESSED.
             </p>
           </div>
-          <button class="btn btn-primary" onclick="runAdminSettle()">⚡ Run Cancellation Settlement Cursor</button>
+          <button class="btn btn-primary" onclick="runAdminSettle()">Run Cancellation Settlement Cursor</button>
         </div>
 
         <div class="metric-card" style="display: flex; flex-direction: column; justify-content: space-between;">
@@ -207,7 +206,7 @@
               Executes <code>sp_expire_stale_bookings(INTERVAL '24 hours')</code>. Loops through uncompleted reservations, releases seat holds via trigger, marks payment FAILED, and sets booking CANCELLED.
             </p>
           </div>
-          <button class="btn btn-secondary" onclick="runAdminExpire()">⏱️ Run Stale Expiry Cursor (24h)</button>
+          <button class="btn btn-secondary" onclick="runAdminExpire()">Run Stale Expiry Cursor (24h)</button>
         </div>
       </div>
 
@@ -231,43 +230,7 @@
       </div>
     </section>
 
-    <!-- TAB 5: Academic Query Suite -->
-    <section id="queriesPane" class="section-pane">
-      <div style="margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1.5rem;">Review II & III Academic SQL Query Suite</h2>
-        <p style="color: var(--text-muted); font-size: 0.85rem;">Select and execute any of the 14 project queries against PostgreSQL 16 live</p>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap;">
-        <select id="querySelect" class="form-control" style="max-width: 450px;" onchange="onQuerySelected()">
-          <option value="1.1">Query 1.1: Upcoming Events in Nov-Dec 2026 (BETWEEN)</option>
-          <option value="1.2">Query 1.2: Standard Email Accounts (LIKE '%@gmail.com')</option>
-          <option value="1.3">Query 1.3: High-Capacity Venues (capacity >= 2000)</option>
-          <option value="2.1">Query 2.1: Detailed Booking Receipts (4-Table INNER JOIN)</option>
-          <option value="2.2">Query 2.2: Venues & Scheduled Events (LEFT OUTER JOIN, COALESCE)</option>
-          <option value="2.3">Query 2.3: Comprehensive Attendee Breakdown (5-Table INNER JOIN)</option>
-          <option value="3.1">Query 3.1: Gross Sales & Avg Price per Event (GROUP BY, SUM, AVG)</option>
-          <option value="3.2">Query 3.2: Organizers with > 1 Event (GROUP BY, HAVING)</option>
-          <option value="3.3">Query 3.3: Total Revenue by Payment Method (CASE Aggregation)</option>
-          <option value="4.1">Query 4.1: Tiers Priced Higher Than Average (Scalar Subquery)</option>
-          <option value="4.3">Query 4.3: Customers with Zero Cancellations (NOT EXISTS Correlated)</option>
-          <option value="5.1">Query 5.1: Revenue Rank of Events (DENSE_RANK Window Function)</option>
-          <option value="5.2">Query 5.2: Cumulative Running Revenue (ROW_NUMBER & Running SUM)</option>
-        </select>
-        <button class="btn btn-primary" onclick="executeSelectedQuery()">▶️ Run Query</button>
-      </div>
-
-      <div id="querySqlBox" class="code-box" style="margin-bottom: 1.5rem;">-- SQL statement will appear here</div>
-
-      <div class="table-wrapper">
-        <table id="queryResultTable">
-          <thead id="queryResultHead"></thead>
-          <tbody id="queryResultBody">
-            <tr><td style="text-align: center; color: var(--text-muted);">Run a query to view results</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    
   </main>
 
   <!-- MODAL: Book Tickets -->
@@ -415,10 +378,10 @@
   <div class="inspector-drawer" id="inspectorDrawer">
     <div class="inspector-header" onclick="toggleInspector()">
       <div class="inspector-title">
-        <span>⚡ LIVE TRANSACTION INSPECTOR</span>
+        <span>LIVE TRANSACTION INSPECTOR</span>
         <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">(Demonstrating Guideline 5-Step Architecture)</span>
       </div>
-      <span id="inspectorToggleIcon" style="color: var(--text-muted); font-size: 0.85rem;">▲ Click to Expand</span>
+      <span id="inspectorToggleIcon" style="color: var(--text-muted); font-size: 0.85rem;">Click to Expand</span>
     </div>
     <div class="inspector-body">
       <div class="inspector-card">

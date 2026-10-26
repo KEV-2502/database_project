@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   checkHealth();
   loadCatalog();
   onUserChanged();
-  onQuerySelected();
 });
 
 // Toast Helper
@@ -19,7 +18,7 @@ function showToast(message, type = "info") {
   const toast = document.createElement("div");
   toast.className = `toast toast-${type}`;
   toast.innerHTML = `
-    <span>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+    <span style="font-weight:700; font-size:0.75rem;">[${type.toUpperCase()}]</span>
     <div style="font-size: 0.85rem;">${message}</div>
   `;
   container.appendChild(toast);
@@ -41,7 +40,7 @@ function updateInspector(operation, sql, triggers, effect) {
   const drawer = document.getElementById("inspectorDrawer");
   if (drawer.classList.contains("collapsed")) {
     drawer.classList.remove("collapsed");
-    document.getElementById("inspectorToggleIcon").innerText = "▼ Click to Collapse";
+    document.getElementById("inspectorToggleIcon").innerText = "Click to Collapse";
     inspectorExpanded = true;
   }
 }
@@ -51,10 +50,10 @@ function toggleInspector() {
   inspectorExpanded = !inspectorExpanded;
   if (inspectorExpanded) {
     drawer.classList.remove("collapsed");
-    document.getElementById("inspectorToggleIcon").innerText = "▼ Click to Collapse";
+    document.getElementById("inspectorToggleIcon").innerText = "Click to Collapse";
   } else {
     drawer.classList.add("collapsed");
-    document.getElementById("inspectorToggleIcon").innerText = "▲ Click to Expand";
+    document.getElementById("inspectorToggleIcon").innerText = "Click to Expand";
   }
 }
 
@@ -146,10 +145,10 @@ async function loadCatalog() {
             <h3 class="event-title">${evt.event_name}</h3>
           </div>
           <div class="event-meta">
-            <div class="event-meta-item">📅 <strong>Date:</strong> ${evt.event_date} at ${evt.event_time}</div>
-            <div class="event-meta-item">📍 <strong>Location:</strong> ${evt.location}</div>
-            <div class="event-meta-item">👤 <strong>Organizer:</strong> ${evt.organizer_name}</div>
-            <div class="event-meta-item">🪑 <strong>Remaining Seats:</strong> <span style="color: var(--accent-cyan); font-weight: 600;">${evt.remaining_seats}</span></div>
+            <div class="event-meta-item"><strong>Date:</strong> ${evt.event_date} at ${evt.event_time}</div>
+            <div class="event-meta-item"><strong>Location:</strong> ${evt.location}</div>
+            <div class="event-meta-item"><strong>Organizer:</strong> ${evt.organizer_name}</div>
+            <div class="event-meta-item"><strong>Remaining Seats:</strong> <span style="color: var(--accent-cyan); font-weight: 600;">${evt.remaining_seats}</span></div>
           </div>
         </div>
         <div class="event-card-footer">
@@ -293,13 +292,13 @@ async function loadUserWallet() {
         if (b.status === "PENDING") {
           actionHtml = `
             <button class="btn btn-success btn-sm" onclick="openPaymentModal(${b.booking_id}, '₹${Number(b.total_amount).toFixed(2)}')">
-              💳 Pay Now (sp_make_payment)
+              Pay Now (sp_make_payment)
             </button>
           `;
         } else if (b.status === "CONFIRMED" && !b.cancellation_status) {
           actionHtml = `
             <button class="btn btn-danger btn-sm" onclick="openCancelModal(${b.booking_id})">
-              🚫 Cancel Booking (sp_cancel_booking)
+              Cancel Booking (sp_cancel_booking)
             </button>
           `;
         } else if (b.cancellation_status) {
