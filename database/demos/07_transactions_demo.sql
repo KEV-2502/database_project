@@ -49,7 +49,7 @@ END $$;
 
 \echo '========================================================================'
 \echo 'TRANSACTION 4: Organizer cannot oversell venue capacity'
-\echo 'Operation: Organizer tries to add 2000 seats to Royal Opera House (cap: 800)'
+\echo 'Operation: Organizer tries to add 2000 seats to Town Hall (cap: 800)'
 \echo 'Procedures/Triggers: trg_category_capacity raises exception before row write'
 \echo '========================================================================'
 DO $$

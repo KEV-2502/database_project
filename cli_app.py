@@ -153,7 +153,7 @@ def op_organizer_occupancy():
 
 def op_test_oversell():
     print("\n--- TEST: VENUE OVER-ALLOCATION (trg_category_capacity) ---")
-    print("Attempting to add a 2,000-seat category to Royal Opera House (event 3, Venue capacity 800)...")
+    print("Attempting to add a 2,000-seat category to Town Hall (event 3, Venue capacity 800)...")
     try:
         add_seat_category(3, "Standing Promenade", 500.00, 2000)
     except Exception as e:

@@ -19,16 +19,16 @@ TRUNCATE TABLE CANCELLATION, PAYMENT, TICKET, BOOKING, SEAT_CATEGORY, EVENT, USE
 -- 1. SEED VENUES (10 Venues across major Indian cities)
 -- -----------------------------------------------------------------------------
 INSERT INTO VENUE (venue_id, venue_name, location, capacity) VALUES
-(1,  'Grand Arena Exhibition Centre',      'Whitefield, Bangalore, Karnataka',         5000),
-(2,  'Tech Park International Auditorium',  'OMR Road, Chennai, Tamil Nadu',            1200),
-(3,  'Royal Opera House Heritage Hall',     'Charni Road, Mumbai, Maharashtra',          800),
-(4,  'Jawaharlal Nehru National Stadium',   'Lodhi Road, New Delhi, Delhi',            25000),
-(5,  'Palace Grounds Convention Centre',    'Bellary Road, Bangalore, Karnataka',      15000),
-(6,  'Netaji Indoor Stadium',               'Eden Gardens, Kolkata, West Bengal',      12000),
-(7,  'Shilpakala Vedika',                   'Hitec City, Hyderabad, Telangana',         2500),
-(8,  'Marine Drive Open Grounds',           'Ernakulam, Kochi, Kerala',                 8000),
-(9,  'Siri Fort Auditorium',                'August Kranti Marg, New Delhi, Delhi',     1800),
-(10, 'Rajasthan International Centre',      'Jhalana Doongri, Jaipur, Rajasthan',       2500);
+(1,  'City Convention Centre',     'MG Road, Bangalore, Karnataka',            5000),
+(2,  'Tech Park Auditorium',       'OMR Road, Chennai, Tamil Nadu',            1200),
+(3,  'Town Hall',                  'Fort, Mumbai, Maharashtra',                 800),
+(4,  'City Stadium',               'Ring Road, New Delhi, Delhi',             25000),
+(5,  'Exhibition Grounds',         'Bellary Road, Bangalore, Karnataka',      15000),
+(6,  'Indoor Sports Complex',      'Salt Lake, Kolkata, West Bengal',         12000),
+(7,  'Community Cultural Hall',    'Hitec City, Hyderabad, Telangana',         2500),
+(8,  'Open Air Grounds',           'Marine Drive, Kochi, Kerala',              8000),
+(9,  'Civic Centre Auditorium',    'Connaught Place, New Delhi, Delhi',        1800),
+(10, 'Central Arts Hall',          'MI Road, Jaipur, Rajasthan',               2500);
 
 SELECT setval('venue_venue_id_seq', 10);
 
